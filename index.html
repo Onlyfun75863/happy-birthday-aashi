@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ek Chhota Sa Sawaal ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Charm:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================= */
+        /* BASE & THEME STYLING */
+        /* ========================================= */
+        :root {
+            --pink: #ffc0cb;
+            --lavender: #e6e6fa;
+            --peach: #ffdab9;
+            --accent-red: #ff69b4;
+            --text-color: #5d3d4e;
+            --transition-speed: 0.5s;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { height: 100%; font-family: 'Poppins', sans-serif; color: var(--text-color); overflow-x: hidden; }
+
+        /* Main Container for the entire App */
+        .spa-container {
+            min-height: 100vh; width: 100vw; display: flex;
+            justify-content: center; align-items: center; text-align: center;
+            position: relative; overflow: hidden; padding: 20px;
+            transition: background 1s ease-in-out;
+        }
+
+        /* Generic Content Box */
+        .content-box {
+            background: rgba(255, 255, 255, 0.9); padding: 40px 20px; border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); backdrop-filter: blur(5px);
+            max-width: 90%; max-width: 550px; z-index: 10;
+            transition: transform var(--transition-speed), opacity var(--transition-speed);
+        }
+
+        h1, .main-heading {
+            font-family: 'Charm', cursive; font-size: clamp(2.5rem, 8vw, 4rem);
+            color: var(--accent-red); margin-bottom: 20px; line-height: 1.2;
+            text-shadow: 2px 2px var(--pink);
+        }
+
+        .button-group { display: flex; flex-direction: column; gap: 20px; margin-top: 30px; }
+
+        .btn {
+            padding: 15px 30px; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: 700;
+            cursor: pointer; text-decoration: none; text-align: center;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.5);
+            opacity: 0.95;
+        }
+
+        /* Mobile Adjustments */
+        @media (min-width: 600px) {
+            .button-group { flex-direction: row; justify-content: center; }
+        }
+
+        /* Hidden Sections */
+        .page {
+            width: 100%; height: 100vh;
+            display: none; /* Default hidden state */
+            justify-content: center; align-items: center;
+            flex-direction: column;
+            position: absolute; top: 0; left: 0;
+            opacity: 0; transform: scale(0.95);
+            transition: opacity 1s, transform 1s;
+        }
+
+        .page.active {
+            display: flex;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ========================================= */
+        /* PAGE 1: ENTRY */
+        /* ========================================= */
+
+        #page1 {
+            background: linear-gradient(135deg, var(--lavender) 0%, var(--pink) 50%, var(--peach) 100%);
+        }
+
+        .btn-ready { background-color: var(--accent-red); color: white; }
+        .btn-nervous { background-color: white; color: var(--accent-red); border: 2px solid var(--accent-red); }
+
+        .nervous-message {
+            color: var(--accent-red); font-size: 1.2rem; font-weight: 700;
+            opacity: 0; transition: opacity 0.5s ease-in-out; margin-top: 15px;
+        }
+
+        /* ========================================= */
+        /* PAGE 2: THE QUESTION */
+        /* ========================================= */
+
+        #page2 {
+            background: linear-gradient(45deg, var(--peach) 0%, var(--lavender) 100%);
+        }
+
+        .theme-line {
+            font-size: clamp(1rem, 3vw, 1.3rem); color: var(--accent-red); margin-bottom: 10px; font-weight: 700;
+        }
+
+        .main-question {
+            font-family: 'Charm', cursive; font-size: clamp(3rem, 10vw, 5.5rem);
+            color: var(--accent-red); text-shadow: 3px 3px var(--pink);
+            animation: pulse 2s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.03); }
+        }
+
+        .btn-yes { background-color: #4CAF50; color: white; }
+        .btn-no { background-color: #F44336; color: white; }
+
+        /* ========================================= */
+        /* PAGE 3: REVELATION */
+        /* ========================================= */
+
+        #page3 {
+            background: radial-gradient(circle at center, var(--pink) 0%, var(--lavender) 70%);
+        }
+
+        .result-emoji { font-size: 5rem; margin-bottom: 10px; display: block; }
+
+        .message { font-size: clamp(1.1rem, 4vw, 1.5rem); margin-bottom: 30px; line-height: 1.6; }
+
+        .final-quote { font-style: italic; font-weight: 700; color: var(--text-color); margin-top: 30px; }
+        
+        /* Floating Hearts (Re-used from original Page 1) */
+        .heart {
+            position: absolute; opacity: 0; pointer-events: none; animation: floatHeart linear infinite;
+        }
+        @keyframes floatHeart {
+            0% { top: 100vh; left: var(--left); opacity: 0; transform: scale(0); }
+            50% { opacity: var(--op); }
+            100% { top: -10vh; left: calc(var(--left) + var(--x)); opacity: 0; transform: scale(var(--s)) rotate(var(--r)); }
+        }
+    </style>
+</head>
+<body>
+    <audio id="bgMusic" loop autoplay>
+         </audio>
+
+    <div class="spa-container">
+
+        <section id="page1" class="page active">
+            <div class="content-box">
+                <h1>Ek chhota sa sawaal hai… ready ho? 😊</h1>
+                <p class="subtext">Warning: Is website me galat jawab allowed nahi hai 😜</p>
+
+                <div class="button-group">
+                    <button type="button" class="btn btn-ready" onclick="goToPage(2)">Bilkul Ready ❤️</button>
+                    <button type="button" class="btn btn-nervous" id="nervousBtn">Thoda Nervous Hoon 🙈</button>
+                </div>
+
+                <p class="nervous-message" id="nervousMsg"></p>
+            </div>
+        </section>
+
+        <section id="page2" class="page">
+            <div class="content-box">
+                <p class="theme-line">
+                    **No matter what you choose, the answer is always YES ❤️**
+                </p>
+
+                <h1 class="main-question">
+                    Kya tum hamesha ke liye meri ho jaogi? 💍
+                </h1>
+                
+                <p class="subtext">
+                    (Take your time, my love. But remember the rule above 😉)
+                </p>
+
+                <div class="button-group">
+                    <button type="button" class="btn btn-yes" onclick="showResult('yes')">Haan, Bilkul! 🥰</button>
+                    <button type="button" class="btn btn-no" onclick="showResult('no')">Umm, Abhi Nahi... 🙈</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="page3" class="page">
+            <div class="content-box">
+                <span class="result-emoji" id="mainEmoji"></span>
+                <h1 class="main-heading" id="mainHeading"></h1>
+                
+                <p class="message" id="resultMessage"></p>
+
+                <p class="final-quote">
+                    Always Yes. Always Yours. ❤️
+                </p>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // =========================================
+        // CORE NAVIGATION LOGIC
+        // =========================================
+        function goToPage(pageNumber) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(`page${pageNumber}`).classList.add('active');
+        }
+
+        // =========================================
+        // PAGE 1 LOGIC (Nervous Button)
+        // =========================================
+        const nervousBtn = document.getElementById('nervousBtn');
+        const nervousMsg = document.getElementById('nervousMsg');
+        const messages = ["Don’t worry, main hoon na 💕", "Everything is going to be okay 🥰", "Bas ek click aur... Come on! 😘"];
+        let clickCount = 0;
+
+        nervousBtn.addEventListener('click', function() {
+            nervousMsg.textContent = messages[clickCount % messages.length];
+            nervousMsg.style.opacity = '1';
+            clickCount++;
+            setTimeout(() => { nervousMsg.style.opacity = '0'; }, 3000);
+        });
+        
+        // =========================================
+        // PAGE 3 LOGIC (Show Result)
+        // =========================================
+        function showResult(answer) {
+            const mainHeading = document.getElementById('mainHeading');
+            const resultMessage = document.getElementById('resultMessage');
+            const mainEmoji = document.getElementById('mainEmoji');
+
+            if (answer === 'yes') {
+                mainEmoji.textContent = '🥳';
+                mainHeading.textContent = 'YES!!! Mera Pyaar ❤️';
+                resultMessage.innerHTML = 'Mujhe pata tha! Tum meri ho aur main hamesha tumhara rahunga. Yeh safar abhi shuru hua hai! I love you so much! 🥰';
+            } else if (answer === 'no') {
+                mainEmoji.textContent = '😘';
+                mainHeading.textContent = 'Surprise! Phir bhi YES! 😂';
+                resultMessage.innerHTML = 'Ha-ha! Yaad hai? **"No matter what she chooses, the answer is always YES!"** Tumhe wahi mil gaya jo tum deserve karti ho: **Mera Pyaar, Hamesha!** Ab chalo date par. 😉';
+            }
+
+            goToPage(3);
+        }
+
+        // =========================================
+        // FLOATING HEARTS ANIMATION
+        // =========================================
+        const container = document.querySelector('.spa-container');
+        for (let i = 0; i < 20; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = (Math.random() > 0.5) ? '❤️' : '✨';
+            
+            const randomLeft = Math.random() * 100;
+            const randomDuration = Math.random() * 10 + 7;
+            
+            heart.style.left = `${randomLeft}vw`;
+            heart.style.fontSize = `${Math.random() * 15 + 10}px`;
+            heart.style.animationDuration = `${randomDuration}s`;
+            heart.style.animationDelay = `${Math.random() * 5}s`;
+            
+            // CSS variables for unique animation path
+            heart.style.setProperty('--left', `${randomLeft}vw`); 
+            heart.style.setProperty('--x', `${Math.random() * 10 - 5}vw`); 
+            heart.style.setProperty('--op', `${Math.random() * 0.7 + 0.3}`); 
+            heart.style.setProperty('--s', `${Math.random() * 0.7 + 0.8}`); 
+            heart.style.setProperty('--r', `${Math.random() * 180 - 90}deg`); 
+
+            container.appendChild(heart);
+        }
+    </script>
+</body>
+</html>
