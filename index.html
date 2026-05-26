@@ -334,20 +334,24 @@ font-size:1.5rem;
 
 <div style="
 position:fixed;
-top:110px;
-right:15px;
-font-size:.9rem;
-opacity:.8;
-z-index:999;
-animation:fade 2s infinite;
+top:90px;
+right:10px;
+font-size:.85rem;
+padding:8px 12px;
+border-radius:20px;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(10px);
+color:white;
+z-index:9999;
 font-family:'Poppins',sans-serif;
+box-shadow:0 0 15px rgba(255,105,180,.4);
+animation:heartbeat 2s infinite;
 ">
 Tap 🎵 for full vibe ❤️
 </div>
-
-<audio id="bgMusic" loop>
+  <audio id="bgMusic" loop>
 <source src="blue.mp3" type="audio/mp3">
-</audio>
+  </audio>
 
 <!-- COUNTDOWN PAGE -->
 <section class="page active" id="countdownPage">
